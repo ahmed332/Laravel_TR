@@ -1,0 +1,82 @@
+
+  @extends('layouts.app')
+  @extends('layouts.navbar')
+
+
+
+  @section('content')
+  @if (session('success'))
+  <div class="alert alert-primary" role="alert">
+      {{session('success')}}
+   </div>
+   @endif
+
+  <div class="text-center">
+      <h1>{{__('messages.Add_your_offer')}}</h1>
+  </div>
+    <div class="container">
+
+            <form method="POST" action="{{route('offers.store')}}" enctype="multipart/form-data">
+
+
+            @csrf
+            <div class="form-group">
+                <label for="exampleInputEmail1">أختر صوره العرض</label>
+                <input type="file" class="form-control" name="photo">
+                @error('photo')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+
+              <label >{{__("messages.mail")}}</label>
+              <input type='email' class="form-control text-center" name="email" aria-describedby="emailHelp"  placeholder="{{__('messages.Enter_Name')}}">
+              @error('email')
+              <span class="text-danger">{{$message}}</span>
+              @enderror
+            </div>
+            <div class="form-group">
+                <label>{{__('messages.Offer_Name_en')}}</label>
+                <input type="text" name='name_en' class="form-control text-center "  placeholder="{{__('messages.Offer_Name_en')}}">
+                @error('name_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            {{-- //arabic name --}}
+            <div class="form-group">
+                <label>{{__('messages.Offer_Name_ar')}}</label>
+                <input type="text" name='name_ar' class="form-control text-center "  placeholder="{{__('messages.Offer_Name_ar')}}">
+                @error('name_ar')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+              <div class="form-group">
+                <label >{{__("messages.Offer_Detales_en")}}</label>
+                <input name="detales_en" class="form-control text-center"  placeholder="{{__('messages.Offer_Detales_en')}}">
+                @error('detales_en')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label >{{__("messages.Offer_Detales_ar")}}</label>
+                <input name="detales_ar" class="form-control text-center"  placeholder="{{__('messages.Offer_Detales_ar')}}">
+                @error('detales_ar')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
+
+
+
+            <button type="submit" > submit</button>
+        </form>
+      </>
+  </div>
+  <style>
+      label{
+          text-align: center
+      }
+  </style>
+
+  @endsection
